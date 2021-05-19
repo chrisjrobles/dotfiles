@@ -1,12 +1,7 @@
 # ------- Lines added by me --------------
 # Put aliases and other environment specific setup in .setup
-if [[ -f ".setup" ]] then
-	source $HOME/.setup
-fi
-
-if [[ -z $GIT_HOME ]] then
-	echo "doing this"
-	GIT_HOME = $HOME
+if [[ -f ".setup.zsh" ]] then
+	source .setup.zsh
 fi
 
 eval `dircolors ~/.customization/solarized/dircolors.txt`
