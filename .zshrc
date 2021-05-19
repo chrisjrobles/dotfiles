@@ -4,7 +4,24 @@ if [[ -f ".setup" ]] then
 	source $HOME/.setup
 fi
 
+if [[ -z $GIT_HOME ]] then
+	echo "doing this"
+	GIT_HOME = $HOME
+fi
+
 eval `dircolors ~/.customization/solarized/dircolors.txt`
+
+# Use zplug to load plugins
+source $ZPLUG_HOME/init.zsh
+zplug "zsh-users/zsh-history-substring-search", dir:"$HOME/.zplug/repos/zsh-history-substring-search"
+zplug "zsh-users/zsh-autosuggestions", dir:"$HOME/.zplug/repos/zsh-autosuggestions"
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load
 
 # ------- Lines configured by zsh-newuser-install ---------
 HISTFILE=~/.histfile
@@ -92,7 +109,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sublime vscode z zsh-autosuggestions)
+plugins=(git sublime vscode z)
 
 source $ZSH/oh-my-zsh.sh
 
